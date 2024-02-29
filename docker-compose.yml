@@ -1,0 +1,28 @@
+# docker compose version
+version: "3.7"
+
+# define services for item-app and item-db
+services:
+  item-app:
+    # base image for service
+    image: ghcr.io/airellrmdn/item-app:v1
+    # port mapping
+    ports:
+      - 80:8080
+    # start item-app after item-db
+    depends_on:
+      - item-db
+    # restart policy for container
+    restart: always
+
+  item-db:
+    image: mongo:3
+    # attach the volume to the container
+    volumes:
+      - app-db:/data/db
+    # restart policy for container
+    restart: always 
+
+# create volumes
+volumes:
+  app-db:
