@@ -30,12 +30,12 @@ jobs:
       - run:  go test -v -short --count=1 $(go list ./...)
   build-app-karsajobs:
    docker:
-      - image: ubuntu:latest
+      - image: docker:stable
    steps:
      - checkout
      - run:
          name: build push image karsajobs
-         command: ./build_push_image_karsajobs.sh
+         command: bash build_push_image_karsajobs.sh
 
 # Orchestrate our job run sequence
 workflows:
