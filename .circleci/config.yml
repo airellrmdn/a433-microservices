@@ -33,8 +33,8 @@ jobs:
       - image: docker:stable
    steps:
      - checkout
-     - run: chmod +x build_push_image_karsajobs.sh
      - run:
+         shell: /bin/bash
          name: build push image karsajobs
          command: ./build_push_image_karsajobs.sh
 
