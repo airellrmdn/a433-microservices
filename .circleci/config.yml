@@ -33,6 +33,7 @@ jobs:
       - image: docker:stable
    steps:
      - checkout
+     - setup_remote_docker
      - run: docker build -t ghcr.io/airellrmdn/karsajobs:latest .
      - run: echo $PASSWORD_GHCR | docker login ghcr.io --username airellrmdn --password-stdin
      - run: docker push ghcr.io/airellrmdn/karsajobs:latest
