@@ -34,8 +34,8 @@ jobs:
    steps:
      - checkout
      - run:
-         name: build push image karsajobs ui
-         command: ./build_push_image_karsajobs_ui.sh
+         name: build push image karsajobs
+         command: ./build_push_image_karsajobs.sh
 
 # Orchestrate our job run sequence
 workflows:
@@ -43,4 +43,7 @@ workflows:
     jobs:
       - lint-dockerfile
       - test-app
-      - build-app-karsajobs
+      - build-app-karsajobs:
+          requires:
+            - lint-dockerfile
+            - test-app
