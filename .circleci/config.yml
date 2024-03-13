@@ -29,11 +29,13 @@ jobs:
             - "/go/pkg/mod"
       - run:  go test -v -short --count=1 $(go list ./...)
   build-app-karsajobs:
+   docker:
+      - image: ubuntu:latest
    steps:
      - checkout
      - run:
          name: build push image karsajobs ui
-         command: bash build_push_image_karsajobs_ui.sh
+         command: ./build_push_image_karsajobs_ui.sh
 
 # Orchestrate our job run sequence
 workflows:
