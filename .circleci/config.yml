@@ -34,6 +34,7 @@ jobs:
    steps:
      - checkout
      - run:
+         shell: /bin/bash
          name: build push image karsajobs
          command: bash build_push_image_karsajobs.sh
 
