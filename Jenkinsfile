@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    docker.build("${DOCKER_REGISTRY}:${IMAGE_TAG}", "-f ./ .")
+                    docker.build("${DOCKER_REGISTRY}:${IMAGE_TAG}")
                 }
             }
         }
