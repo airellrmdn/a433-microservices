@@ -26,7 +26,7 @@ pipeline {
             steps {
             script {
                     // Log in to the Docker registry
-                    docker.withRegistry("https://hub.docker.com", "${DOCKER_CREDENTIALS_ID}") {
+                    docker.withRegistry('', "${DOCKER_CREDENTIALS_ID}") {
                     echo "Logged in to Docker registry"
                     }
                 }
@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                 // Push the Docker image to the registry
-                docker.withRegistry("https://${DOCKER_REGISTRY}", "${DOCKER_CREDENTIALS_ID}") {
+                docker.withRegistry('', "${DOCKER_CREDENTIALS_ID}") {
                         def image = docker.image("${DOCKER_REGISTRY}:${IMAGE_TAG}")
                         image.push()
                     }
