@@ -22,6 +22,11 @@ pipeline {
                 }
             }
         }
+        stage('Grype scan') {
+            steps {
+                grypeScan scanDest: "docker:${DOCKER_REGISTRY}:${IMAGE_TAG}", repName: "myScanResult-${JOB_BASE_NAME}1.txt", autoInstall:true
+            }
+        }
         stage('Docker Login') {
             steps {
             script {
@@ -46,7 +51,18 @@ pipeline {
     }
     post {
         always {
-            cleanWs()
+            script {
+                // Clean up the Docker image from the local workspace
+                sh "docker rmi ${DOCKER_REGISTRY}:${IMAGE_TAG} || true"
+            }
+            recordIssues(
+                tools: [grype()],
+                aggregatingResults: true,
+                //failedNewAll: 1, //fail if >=1 new issues
+                //failedTotalHigh: 20, //fail if >=20 HIGHs
+                //failedTotalAll : 100, //fail if >=100 issues in total
+                //failOnError: true
+            )
         }
     }
 }
