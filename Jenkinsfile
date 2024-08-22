@@ -57,7 +57,7 @@ pipeline {
             }
             recordIssues(
                 tools: [grype()],
-                aggregatingResults: true,
+                //aggregatingResults: true,
                 //failedNewAll: 1, //fail if >=1 new issues
                 //failedTotalHigh: 20, //fail if >=20 HIGHs
                 //failedTotalAll : 100, //fail if >=100 issues in total
