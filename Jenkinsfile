@@ -55,6 +55,7 @@ pipeline {
                 // Clean up the Docker image from the local workspace
                 sh "docker rmi ${DOCKER_REGISTRY}:${IMAGE_TAG} -f || true"
             }
+            discoverReferenceBuild()
             recordIssues(
                 tools: [grype()],
                 aggregatingResults: false,
